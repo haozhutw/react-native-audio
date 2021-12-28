@@ -1,11 +1,8 @@
 'use strict';
 
-import React from "react";
-
-import ReactNative, {
+import {
   NativeModules,
   NativeAppEventEmitter,
-  DeviceEventEmitter,
   PermissionsAndroid,
   Platform
 } from "react-native";
@@ -74,7 +71,9 @@ var AudioRecorder = {
   stopRecording: function() {
     return AudioRecorderManager.stopRecording();
   },
-  checkAuthorizationStatus: AudioRecorderManager.checkAuthorizationStatus,
+  checkAuthorizationStatus: function() {
+    return AudioRecorderManager.checkAuthorizationStatus();
+  },
   requestAuthorization: () => {
     if (Platform.OS === 'ios')
       return AudioRecorderManager.requestAuthorization();
@@ -97,37 +96,24 @@ var AudioRecorder = {
 };
 
 let AudioUtils = {};
-let AudioSource = {};
 
 if (Platform.OS === 'ios') {
   AudioUtils = {
-    MainBundlePath: AudioRecorderManager.MainBundlePath,
-    CachesDirectoryPath: AudioRecorderManager.NSCachesDirectoryPath,
-    DocumentDirectoryPath: AudioRecorderManager.NSDocumentDirectoryPath,
-    LibraryDirectoryPath: AudioRecorderManager.NSLibraryDirectoryPath,
+    MainBundlePath: () => AudioRecorderManager.MainBundlePath,
+    CachesDirectoryPath: () => AudioRecorderManager.NSCachesDirectoryPath,
+    DocumentDirectoryPath: () => AudioRecorderManager.NSDocumentDirectoryPath,
+    LibraryDirectoryPath: () => AudioRecorderManager.NSLibraryDirectoryPath,
   };
 } else if (Platform.OS === 'android') {
   AudioUtils = {
-    MainBundlePath: AudioRecorderManager.MainBundlePath,
-    CachesDirectoryPath: AudioRecorderManager.CachesDirectoryPath,
-    DocumentDirectoryPath: AudioRecorderManager.DocumentDirectoryPath,
-    LibraryDirectoryPath: AudioRecorderManager.LibraryDirectoryPath,
-    PicturesDirectoryPath: AudioRecorderManager.PicturesDirectoryPath,
-    MusicDirectoryPath: AudioRecorderManager.MusicDirectoryPath,
-    DownloadsDirectoryPath: AudioRecorderManager.DownloadsDirectoryPath
-  };
-  AudioSource = {
-    DEFAULT: 0,
-    MIC: 1,
-    VOICE_UPLINK: 2,
-    VOICE_DOWNLINK: 3,
-    VOICE_CALL: 4,
-    CAMCORDER: 5,
-    VOICE_RECOGNITION: 6,
-    VOICE_COMMUNICATION: 7,
-    REMOTE_SUBMIX: 8, // added in API 19
-    UNPROCESSED: 9, // added in API 24
+    MainBundlePath: () => AudioRecorderManager.MainBundlePath,
+    CachesDirectoryPath: () => AudioRecorderManager.CachesDirectoryPath,
+    DocumentDirectoryPath: () => AudioRecorderManager.DocumentDirectoryPath,
+    LibraryDirectoryPath: () => AudioRecorderManager.LibraryDirectoryPath,
+    PicturesDirectoryPath: () => AudioRecorderManager.PicturesDirectoryPath,
+    MusicDirectoryPath: () => AudioRecorderManager.MusicDirectoryPath,
+    DownloadsDirectoryPath: () => AudioRecorderManager.DownloadsDirectoryPath
   };
 }
 
-module.exports = {AudioRecorder, AudioUtils, AudioSource};
+module.exports = {AudioRecorder, AudioUtils};
