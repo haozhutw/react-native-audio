@@ -83,9 +83,9 @@ class AudioRecorderManager extends ReactContextBaseJavaModule {
   @Override
   public Map<String, Object> getConstants() {
     Map<String, Object> constants = new HashMap<>();
+    ReactApplicationContext ctx = this.getReactApplicationContext();
     constants.put(DocumentDirectoryPath, ctx.getFilesDir().getAbsolutePath());
     constants.put(CachesDirectoryPath, ctx.getCacheDir().getAbsolutePath());
-    ReactApplicationContext ctx = this.getReactApplicationContext();
     if (Build.VERSION.SDK_INT > Build.VERSION_CODES.Q) {
       constants.put(PicturesDirectoryPath, ctx.getExternalFilesDir(Environment.DIRECTORY_PICTURES).getAbsolutePath());
       constants.put(MusicDirectoryPath, ctx.getExternalFilesDir(Environment.DIRECTORY_MUSIC).getAbsolutePath());
