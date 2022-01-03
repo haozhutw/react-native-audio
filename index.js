@@ -116,4 +116,18 @@ if (Platform.OS === 'ios') {
   };
 }
 
-module.exports = {AudioRecorder, AudioUtils};
+var AudioSource;
+(function (AudioSource) {
+  AudioSource["DEFAULT"] = 0;
+  AudioSource["MIC"] = 1;
+  AudioSource["VOICE_UPLINK"] = 2;
+  AudioSource["VOICE_DOWNLINK"] = 3;
+  AudioSource["VOICE_CALL"] = 4;
+  AudioSource["CAMCORDER"] = 5;
+  AudioSource["VOICE_RECOGNITION"] = 6;
+  AudioSource["VOICE_COMMUNICATION"] = 7;
+  AudioSource["REMOTE_SUBMIX"] = 8;
+  AudioSource["UNPROCESSED"] = 9;
+})(AudioSource || (AudioSource = {}));
+
+module.exports = {AudioRecorder, AudioUtils, AudioSource};
