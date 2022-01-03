@@ -83,13 +83,18 @@ class AudioRecorderManager extends ReactContextBaseJavaModule {
   @Override
   public Map<String, Object> getConstants() {
     Map<String, Object> constants = new HashMap<>();
-    constants.put(DocumentDirectoryPath, this.getReactApplicationContext().getFilesDir().getAbsolutePath());
-    constants.put(PicturesDirectoryPath, Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsolutePath());
-    constants.put(MainBundlePath, "");
-    constants.put(CachesDirectoryPath, this.getReactApplicationContext().getCacheDir().getAbsolutePath());
-    constants.put(LibraryDirectoryPath, "");
-    constants.put(MusicDirectoryPath, Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC).getAbsolutePath());
-    constants.put(DownloadsDirectoryPath, Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath());
+    constants.put(DocumentDirectoryPath, ctx.getFilesDir().getAbsolutePath());
+    constants.put(CachesDirectoryPath, ctx.getCacheDir().getAbsolutePath());
+    ReactApplicationContext ctx = this.getReactApplicationContext();
+    if (Build.VERSION.SDK_INT > Build.VERSION_CODES.Q) {
+      constants.put(PicturesDirectoryPath, ctx.getExternalFilesDir(Environment.DIRECTORY_PICTURES).getAbsolutePath());
+      constants.put(MusicDirectoryPath, ctx.getExternalFilesDir(Environment.DIRECTORY_MUSIC).getAbsolutePath());
+      constants.put(DownloadsDirectoryPath, ctx.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath());
+    } else {
+      constants.put(PicturesDirectoryPath, Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsolutePath());
+      constants.put(MusicDirectoryPath, Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC).getAbsolutePath());
+      constants.put(DownloadsDirectoryPath, Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath());
+    }
     return constants;
   }
 

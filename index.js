@@ -99,20 +99,18 @@ let AudioUtils = {};
 
 if (Platform.OS === 'ios') {
   AudioUtils = {
-    MainBundlePath: () => AudioRecorderManager.MainBundlePath,
+    MainBundlePathIOS: () => AudioRecorderManager.MainBundlePath,
     CachesDirectoryPath: () => AudioRecorderManager.NSCachesDirectoryPath,
     DocumentDirectoryPath: () => AudioRecorderManager.NSDocumentDirectoryPath,
-    LibraryDirectoryPath: () => AudioRecorderManager.NSLibraryDirectoryPath,
+    LibraryDirectoryPathIOS: () => AudioRecorderManager.NSLibraryDirectoryPath,
   };
 } else if (Platform.OS === 'android') {
   AudioUtils = {
-    MainBundlePath: () => AudioRecorderManager.MainBundlePath,
     CachesDirectoryPath: () => AudioRecorderManager.CachesDirectoryPath,
     DocumentDirectoryPath: () => AudioRecorderManager.DocumentDirectoryPath,
-    LibraryDirectoryPath: () => AudioRecorderManager.LibraryDirectoryPath,
-    PicturesDirectoryPath: () => AudioRecorderManager.PicturesDirectoryPath,
-    MusicDirectoryPath: () => AudioRecorderManager.MusicDirectoryPath,
-    DownloadsDirectoryPath: () => AudioRecorderManager.DownloadsDirectoryPath
+    PicturesDirectoryPathAndroid: () => AudioRecorderManager.PicturesDirectoryPath,
+    MusicDirectoryPathAndroid: () => AudioRecorderManager.MusicDirectoryPath,
+    DownloadsDirectoryPathAndroid: () => AudioRecorderManager.DownloadsDirectoryPath
   };
 }
 

@@ -35,11 +35,11 @@ declare module "react-native-audio" {
   export const AudioUtils: {
     CachesDirectoryPath: () => string;
     DocumentDirectoryPath: () => string;
-    DownloadsDirectoryPath: () => string;
-    LibraryDirectoryPath: () => string;
-    MainBundlePath: () => string;
-    MusicDirectoryPath: () => string;
-    PicturesDirectoryPath: () => string;
+    LibraryDirectoryPathIOS: () => string;
+    MainBundlePathIOS: () => string;
+    DownloadsDirectoryPathAndroid: () => string;
+    MusicDirectoryPathAndroid: () => string;
+    PicturesDirectoryPathAndroid: () => string;
   };
 
   export enum AudioSource {
